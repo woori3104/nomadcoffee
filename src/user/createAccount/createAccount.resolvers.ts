@@ -1,7 +1,8 @@
+import { Resolvers } from "../../types";
 import * as bcrypt from "bcrypt";
 import client from "../../client";
 
-export default {
+const resolvers: Resolvers = {
     Mutation: {
         createAccount: async (_, {
             userName,
@@ -44,9 +45,9 @@ export default {
                 });
                 return { ok: true };
             } catch (error) {
-                console.log(error);
                 return { ok: false, error: "Could not create account." };
             }
         },
     },
 };
+export default resolvers;
