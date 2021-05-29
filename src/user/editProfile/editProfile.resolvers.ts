@@ -1,7 +1,7 @@
-import * as fs from "fs";
 import * as bcrypt from "bcrypt";
 import { protectedResolver } from "../users.utils";
 import { Resolvers } from "../../types";
+import { uploadToS3 } from "../../shared/shared.utils";
 
 const resolverFn = async (
     _,
@@ -10,14 +10,9 @@ const resolverFn = async (
 ) => {
     let avatar = null;
     if (avatarURL) {
-        const { filename, createReadStream } = await avatarURL;
-        const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
-        const readStream = createReadStream();
-        const writeStream = fs.createWriteStream(process.cwd() + "/uploads/" + newFilename);
-        readStream.pipe(writeStream);
-        avatar = `http://locahost:4000//static/${newFilename}`;
+        avatar = await uploadToS3(avatarURL, loggedInUser.id, "avatars");
     }
-
+    console.log(avatar);
     let uglyPassword = null;
     if (newPassword) {
         uglyPassword = await bcrypt.hash(newPassword, 10);
@@ -38,12 +33,12 @@ const resolverFn = async (
     });
     if (updatedUser.id) {
         return {
-        ok: true,
+            ok: true,
         };
     } else {
         return {
-        ok: false,
-        error: "Could not update profile.",
+            ok: false,
+            error: "Could not update profile.",
         };
     }
     };
