@@ -10,10 +10,12 @@ export default gql`
         password: String!
         avatarURL: String
         githubUsername: String
+        searchs: [User]
+        followers: [User]
+        followings: [User]
+        totalFollowings: Int!
+        totalFollowers: Int!
         createdAt: String!
         updatedAt: String!
-    }
-    type  Query {
-        users: [User]
     }
 `
