@@ -11,10 +11,8 @@ export default gql`
         avatarURL: String
         githubUsername: String
         searchs: [User]
-        followers: [User]
-        followings: [User]
-        totalFollowings: Int!
-        totalFollowers: Int!
+        followers(page:Int): [User]
+        followings(page:Int): [User]
         createdAt: String!
         updatedAt: String!
     }
