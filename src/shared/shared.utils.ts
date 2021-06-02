@@ -7,7 +7,8 @@ AWS.config.update({
     },
 });
 
-export const uploadToS3 = async(file, userid, folderName) => {
+export const uploadToS3 = async (file, userid, folderName) => {
+    console.log(file);
     const { filename, createReadStream } = await file;
     const objectName = `${folderName}/${userid}-${Date.now()}-${filename}`;
     const readStream = createReadStream();

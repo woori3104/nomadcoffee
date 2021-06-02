@@ -1,6 +1,7 @@
 import { Resolvers } from "../../types";
 import * as bcrypt from "bcrypt";
 import client from "../../client";
+import { uploadToS3 } from "../../shared/shared.utils";
 
 const resolvers: Resolvers = {
     Mutation: {
@@ -14,6 +15,10 @@ const resolvers: Resolvers = {
             githubUsername
         }) => {
             try {
+                let avatar;
+                if (avatarURL) {
+                    avatar = await uploadToS3(avatarURL, userName, "avatars");
+                }
                 //check if username or email are already on DB. 
                 const existingUser = await client.user.findFirst({
                     where: {
@@ -39,7 +44,7 @@ const resolvers: Resolvers = {
                         name,
                         location,
                         password: uglyPassword,
-                        avatarURL,
+                        ...(avatar && { avatarURL: avatar }),
                         githubUsername
                     },
                 });

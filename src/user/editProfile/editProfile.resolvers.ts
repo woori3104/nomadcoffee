@@ -10,9 +10,8 @@ const resolverFn = async (
 ) => {
     let avatar = null;
     if (avatarURL) {
-        avatar = await uploadToS3(avatarURL, loggedInUser.id, "avatars");
+        avatar = await uploadToS3(avatarURL, loggedInUser.userName, "avatars");
     }
-    console.log(avatar);
     let uglyPassword = null;
     if (newPassword) {
         uglyPassword = await bcrypt.hash(newPassword, 10);
