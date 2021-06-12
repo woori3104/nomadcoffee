@@ -35,27 +35,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __asyncValues = (this && this.__asyncValues) || function (o) {
-    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-    var m = o[Symbol.asyncIterator], i;
-    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
-    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
-    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var users_utils_1 = require("../../user/users.utils");
 var shared_utils_1 = require("../../shared/shared.utils");
 exports.default = {
     Mutation: {
         createCoffeeShop: users_utils_1.protectedResolver(function (_, _a, _b) {
-            var photos_1, photos_1_1;
             var name = _a.name, latitude = _a.latitude, longitude = _a.longitude, photos = _a.photos, categories = _a.categories;
             var loggedInUser = _b.loggedInUser, client = _b.client;
             return __awaiter(void 0, void 0, void 0, function () {
-                var ok, categoryObjs, photoObjs, photo, url, e_1_1;
-                var e_1, _c;
-                return __generator(this, function (_d) {
-                    switch (_d.label) {
+                var ok, categoryObjs, photoObjs;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
                         case 0:
                             console.log("createCoffeeshop");
                             console.log(name);
@@ -70,7 +61,7 @@ exports.default = {
                                     },
                                 })];
                         case 1:
-                            ok = _d.sent();
+                            ok = _c.sent();
                             if (!ok) {
                                 return [2 /*return*/, {
                                         ok: false,
@@ -90,40 +81,25 @@ exports.default = {
                             }
                             ;
                             photoObjs = [];
-                            if (!photos) return [3 /*break*/, 14];
-                            _d.label = 2;
+                            if (!photos) return [3 /*break*/, 3];
+                            return [4 /*yield*/, Promise.all(photos.map(function (photo) { return __awaiter(void 0, void 0, void 0, function () {
+                                    var photoUrl;
+                                    return __generator(this, function (_a) {
+                                        switch (_a.label) {
+                                            case 0: return [4 /*yield*/, shared_utils_1.uploadToS3(photo, loggedInUser.id, "shops")];
+                                            case 1:
+                                                photoUrl = _a.sent();
+                                                photoObjs.push({
+                                                    url: photoUrl,
+                                                });
+                                                return [2 /*return*/];
+                                        }
+                                    });
+                                }); }))];
                         case 2:
-                            _d.trys.push([2, 8, 9, 14]);
-                            photos_1 = __asyncValues(photos);
-                            _d.label = 3;
-                        case 3: return [4 /*yield*/, photos_1.next()];
-                        case 4:
-                            if (!(photos_1_1 = _d.sent(), !photos_1_1.done)) return [3 /*break*/, 7];
-                            photo = photos_1_1.value;
-                            return [4 /*yield*/, shared_utils_1.uploadToS3(photo, loggedInUser.id, "shops")];
-                        case 5:
-                            url = _d.sent();
-                            photoObjs.push({ url: url });
-                            _d.label = 6;
-                        case 6: return [3 /*break*/, 3];
-                        case 7: return [3 /*break*/, 14];
-                        case 8:
-                            e_1_1 = _d.sent();
-                            e_1 = { error: e_1_1 };
-                            return [3 /*break*/, 14];
-                        case 9:
-                            _d.trys.push([9, , 12, 13]);
-                            if (!(photos_1_1 && !photos_1_1.done && (_c = photos_1.return))) return [3 /*break*/, 11];
-                            return [4 /*yield*/, _c.call(photos_1)];
-                        case 10:
-                            _d.sent();
-                            _d.label = 11;
-                        case 11: return [3 /*break*/, 13];
-                        case 12:
-                            if (e_1) throw e_1.error;
-                            return [7 /*endfinally*/];
-                        case 13: return [7 /*endfinally*/];
-                        case 14: return [4 /*yield*/, client.coffeeShop.create({
+                            _c.sent();
+                            _c.label = 3;
+                        case 3: return [4 /*yield*/, client.coffeeShop.create({
                                 data: {
                                     name: name,
                                     latitude: latitude,
@@ -141,8 +117,8 @@ exports.default = {
                                     },
                                 },
                             })];
-                        case 15:
-                            _d.sent();
+                        case 4:
+                            _c.sent();
                             return [2 /*return*/, {
                                     ok: true,
                                 }];
