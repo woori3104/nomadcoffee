@@ -4,7 +4,7 @@ import coffeShopTypeDefs from "../coffeShop.typeDefs";
 
 export default {
   Mutation: {
-    createCoffeeshop: protectedResolver(
+    createCoffeeShop: protectedResolver(
       async (_, { name, latitude, longitude, photos, categories }, { loggedInUser, client }) => {
         const ok = await client.user.findUnique({
           where: {
