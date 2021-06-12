@@ -8,12 +8,14 @@ AWS.config.update({
 });
 
 export const uploadToS3 = async (file, userid, folderName) => {
+    console.log("uploadToS3");
     console.log(file);
     const { filename, createReadStream } = await file;
     const objectName = `${folderName}/${userid}-${Date.now()}-${filename}`;
     const readStream = createReadStream();
-    console.log(file);
     console.log(objectName);
+    console.log(file);
+    
     const { Location } = await new AWS.S3().upload({
         Bucket: "woori-nomad-coffee-uploaders",
         Key: objectName,
