@@ -7,6 +7,7 @@ import client from "../../client";
 const resolvers: Resolvers = {
   Mutation: {
     login: async (_, { userName, password }) => {
+      console.log("login start");
       const user = await client.user.findFirst({ where: { userName } });
       if (!user) {
         return {
@@ -21,7 +22,8 @@ const resolvers: Resolvers = {
           error: "Incorrect password.",
         };
       }
-      const token:String = await jwt.sign({ id: user.id }, process.env.SECRET_KEY);
+      const token: String = await jwt.sign({ id: user.id }, process.env.SECRET_KEY);
+      console.log("login Error");
       return {
         ok: true,
         token,

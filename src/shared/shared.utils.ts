@@ -1,4 +1,5 @@
 import * as AWS from "aws-sdk";
+const fs = require('fs');
 
 AWS.config.update({
     credentials: {
@@ -8,19 +9,23 @@ AWS.config.update({
 });
 
 export const uploadToS3 = async (file, userid, folderName) => {
+    console.log("uploadToS3 start");
     console.log(file);
     const { filename, createReadStream } = await file;
     const objectName = `${folderName}/${userid}-${Date.now()}-${filename}`;
+    console.log(`objectName:${objectName}`);
     const readStream = createReadStream();
-    console.log(file);
-    console.log(objectName);
+
     const { Location } = await new AWS.S3().upload({
-        Bucket: "woori-nomad-coffee-uploaders",
+        Bucket:"wr-nomadcoffee-uplods",
+            //"woori-nomad-coffee-uploaders",
         Key: objectName,
         ACL: "public-read",
         Body: readStream,
     })
-        .promise();
+    .promise();
     console.log(Location);
+    
+    console.log("uploadToS3 end");
     return Location;
 };

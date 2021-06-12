@@ -3,7 +3,7 @@ import client from "../../client";
 export default {
   Query: {
     seeCategories: async (_, { page = 1 }) => {
-      const categories = await client.category.findMany({
+      await client.category.findMany({
         orderBy: {
           name: 'asc',
         },
