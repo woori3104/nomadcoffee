@@ -36,13 +36,21 @@ export default {
         };
 
         let photoObjs = [];
-        if (photos) {
-          for await (let photo of photos) {
-            const url = await uploadToS3(photo, loggedInUser.id, "shops");
-            photoObjs.push({url:url});
-          }
+         if (photos) {
+          await Promise.all(
+            photos.map(async (photo) => {
+              let photoUrl = await uploadToS3(
+                photo,
+                loggedInUser.id,
+                "shops"
+              );
+              photoObjs.push({
+                url: photoUrl,
+              });
+            })
+          );
         }
-
+        
         await client.coffeeShop.create({
           data: {
             name,
