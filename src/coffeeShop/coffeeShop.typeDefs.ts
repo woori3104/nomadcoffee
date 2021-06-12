@@ -9,5 +9,6 @@ export default gql`
         user:       User!
         photos:     [CoffeeShopPhoto]
         categories: [Category]
+        isMine:     Boolean
     }
 `

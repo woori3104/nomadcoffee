@@ -15,6 +15,7 @@ const resolvers: Resolvers = {
             githubUsername
         }) => {
             try {
+                console.log("createAccount start");
                 let avatar;
                 if (avatarURL) {
                     avatar = await uploadToS3(avatarURL, userName, "avatars");
@@ -48,6 +49,7 @@ const resolvers: Resolvers = {
                         githubUsername
                     },
                 });
+                console.log("createAccount End");
                 return { ok: true };
             } catch (error) {
                 return { ok: false, error: "Could not create account." };

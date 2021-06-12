@@ -2,12 +2,12 @@ import { gql } from "apollo-server";
 
 export default gql`
     type Mutation {
-        createCoffeeshop(
+        createCoffeeShop(
             name: String!
             latitude: String!
             longitude: String!
-            photos: [Upload!]
-            categories: [String!]
+            photos: [Upload]
+            categories: [String]
         ): MutationResponse!
     }
 `;

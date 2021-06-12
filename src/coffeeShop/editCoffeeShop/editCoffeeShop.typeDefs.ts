@@ -7,7 +7,7 @@ export default gql`
       name: String
       latitude: String
       longitude: String
-      categories: [String!]
+      categories: [String]
     ): MutationResponse!
   }
 `;
