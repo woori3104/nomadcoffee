@@ -5,10 +5,7 @@ export default {
   Mutation: {
     createCoffeeShop: protectedResolver(
       async (_, { name, latitude, longitude, photos, categories }, { loggedInUser, client }) => {
-        console.log("createCoffeeshop");
-        console.log(name);
-        console.log(photos);
-        console.log(categories);
+        console.log("createCoffeeShop start");
         const ok = await client.user.findUnique({
           where: {
             id: loggedInUser.id,
@@ -69,6 +66,7 @@ export default {
             },
           },
         });
+        console.log("createCoffeeShop end");
         return {
           ok: true,
         };
