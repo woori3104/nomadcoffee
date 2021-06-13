@@ -5,7 +5,7 @@ import {typeDefs, resolvers} from "./schema";
 import client from "./client";
 import { getUser } from "./user/users.utils";
 import { graphqlUploadExpress } from "graphql-upload";
-
+const cors = require("cors");
 const apollo = new ApolloServer({
     resolvers,
     typeDefs,
@@ -25,7 +25,7 @@ const app = express();
 
 
 apollo.applyMiddleware({ app });
-
+app.user(cors);
 // CORS 허용 미들웨어 - 프로덕션일 경우 라이브 URL로 변경
 app.use("*", function (req, res, next) {
   console.log(`req:${req}`);
