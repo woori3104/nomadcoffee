@@ -17,7 +17,8 @@ export const uploadToS3 = async (file, userid, folderName) => {
     console.log(readStream);
 
     const { Location } = await new AWS.S3().upload({
-        Bucket: "woori-nomad-coffee-uploaders",
+        Bucket:"wr-nomadcoffee-uplods",
+            //"woori-nomad-coffee-uploaders",
         Key: objectName,
         ACL: "public-read",
         Body: readStream,
