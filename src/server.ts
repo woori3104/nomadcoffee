@@ -25,6 +25,11 @@ const app = express();
 
 
 apollo.applyMiddleware({ app });
+app.get("*", function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 
 app.use(graphqlUploadExpress({ maxFileSize: 1000000000, maxFiles: 10 }));
 app.use("/static", express.static("uploads"));
