@@ -37,7 +37,6 @@ app.use("*", function (req, res, next) {
 app.use(graphqlUploadExpress({ maxFileSize: 1000000000, maxFiles: 10 }));
 app.use("/static", express.static("uploads"));
 
-apollo.applyMiddleware({ app });
 app.listen({ port: PORT }, () => {
   console.log(`🚀Server is running on http://localhost:${PORT}/graphql ✅`);
 });
