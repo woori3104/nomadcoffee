@@ -2,7 +2,7 @@ import { Resolvers } from "../../types";
 import { protectedResolver } from "../../user/users.utils";
 
 const resolverFn = async (_, { id, name, latitude, longitude, categories}, { loggedInUser,client }) => {
-    console.log("editCoffeeShop");
+    console.log("editCoffeeShop start");
     let categoryObjs = [];
     if (categories) {
         categories.forEach(category => {
@@ -24,13 +24,14 @@ const resolverFn = async (_, { id, name, latitude, longitude, categories}, { log
         },
     });
     if (!shop) {
+        console.log("Cannot edit not yours.");
+        console.log("editCoffeeShop End");
         return {
             ok: false,
             error: "Cannot edit not yours."
         }
     }
-    console.log("editCoffeeShop");
-  
+
     const updatedCoffeeShop = await client.coffeeShop.update({
         where: 
         {
@@ -46,7 +47,6 @@ const resolverFn = async (_, { id, name, latitude, longitude, categories}, { log
             },
         }
     });
-    console.log(updatedCoffeeShop);
     if (updatedCoffeeShop.id) {
         return {
             ok: true,

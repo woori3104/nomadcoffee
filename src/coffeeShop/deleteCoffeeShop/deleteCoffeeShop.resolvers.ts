@@ -6,6 +6,7 @@ import client from "../../client";
 export default {
   Mutation: {
     deleteCoffeeShop: protectedResolver(async (_, { id }, { loggedInUser }) => {
+      console.log("deleteCoffeeShop start");
       const coffeeShop = await client.coffeeShop.findUnique({
         where: {
           id,
@@ -15,11 +16,15 @@ export default {
         },
       });
       if (!coffeeShop) {
+        console.log("coffeeShop not found.");
+        console.log("deleteCoffeeShop End");
         return {
           ok: false,
           error: "coffeeShop not found.",
         };
       } else if (coffeeShop.userId !== loggedInUser.id) {
+        console.log("Not authorized.");
+        console.log("deleteCoffeeShop End");
         return {
           ok: false,
           error: "Not authorized.",
@@ -33,7 +38,7 @@ export default {
           },
           deleteParent: true,
         });
-        
+        console.log("deleteCoffeeShop End");
         return {
           ok: true,
         };

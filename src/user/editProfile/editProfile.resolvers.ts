@@ -8,6 +8,7 @@ const resolverFn = async (
   { userName, email, name, location, password: newPassword, avatarURL, githubUsername },
   { loggedInUser, client }
 ) => {
+    console.log("editProfile start");
     let avatar = null;
     if (avatarURL) {
         avatar = await uploadToS3(avatarURL, loggedInUser.userName, "avatars");
@@ -30,11 +31,14 @@ const resolverFn = async (
             ...(avatar && { avatarURL: avatar }),
         },
     });
+    
     if (updatedUser.id) {
+        console.log("editProfile End");
         return {
             ok: true,
         };
     } else {
+        console.log("editProfile Error");
         return {
             ok: false,
             error: "Could not update profile.",

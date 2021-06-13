@@ -5,6 +5,7 @@ export default {
   Query: {
     me: protectedResolver((_, __, { loggedInUser }) => {
       try {
+        console.log("Me start");
         console.log(loggedInUser);
         return client.user.findUnique({
           where: {
