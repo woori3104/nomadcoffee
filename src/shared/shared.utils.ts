@@ -14,10 +14,9 @@ export const uploadToS3 = async (file, userid, folderName) => {
     const { filename, createReadStream } = await file;
     const objectName = `${folderName}/${userid}-${Date.now()}-${filename}`;
     console.log(`objectName:${objectName}`);
-   // const readStream = createReadStream();
-   // console.log(readStream);
-    const readStream = fs.createReadStream(file);
+    const readStream = createReadStream();
     console.log(readStream);
+
     const { Location } = await new AWS.S3().upload({
         Bucket:"wr-nomadcoffee-uplods",
             //"woori-nomad-coffee-uploaders",
