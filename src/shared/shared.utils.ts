@@ -27,5 +27,5 @@ export const uploadToS3 = async (file, userid, folderName) => {
     console.log(Location);
     
     console.log("uploadToS3 end");
-    return objectName;
+    return Location;
 };
