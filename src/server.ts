@@ -8,7 +8,6 @@ import { graphqlUploadExpress } from "graphql-upload";
 const apollo = new ApolloServer({
   resolvers,
   typeDefs,
-  uploads: false,
   playground:true,
   introspection:true,
   context: async({req}) => {
@@ -31,7 +30,6 @@ app.get("*", function (req, res, next) {
   next();
 });
 
-app.use(graphqlUploadExpress({ maxFileSize: 1000000000, maxFiles: 10 }));
 app.use("/static", express.static("uploads"));
 
 app.listen({ port: PORT }, () => {

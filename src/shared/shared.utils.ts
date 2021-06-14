@@ -30,7 +30,3 @@ export const uploadToS3 = async (file, userid, folderName) => {
     console.log("uploadToS3 end");
     return objectName;
 };
-
-function req_error(res: any, err: any) {
-    throw new Error("Function not implemented.");
-}
