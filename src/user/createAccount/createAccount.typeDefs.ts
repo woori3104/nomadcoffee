@@ -12,6 +12,7 @@ export default gql`
             name: String!
             location: String!
             password: String!
+            bio : String
             avatarURL: Upload
             githubUsername: String
         ): createAccountResult

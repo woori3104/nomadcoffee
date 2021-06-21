@@ -5,7 +5,7 @@ import { uploadToS3 } from "../../shared/shared.utils";
 
 const resolverFn = async (
     _,
-  { userName, email, name, location, password: newPassword, avatarURL, githubUsername },
+  { userName, email, name, location, password: newPassword,bio, avatarURL, githubUsername },
   { loggedInUser, client }
 ) => {
     console.log("editProfile start");
@@ -26,6 +26,7 @@ const resolverFn = async (
             name,
             location,
             email,
+            bio,
             githubUsername,
             ...(uglyPassword && { password: uglyPassword }),
             ...(avatar && { avatarURL: avatar }),

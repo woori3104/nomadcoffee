@@ -10,6 +10,7 @@ const resolvers: Resolvers = {
             email,
             password,
             name,
+            bio,
             location,
             avatarURL,
             githubUsername
@@ -44,6 +45,7 @@ const resolvers: Resolvers = {
                         email,
                         name,
                         location,
+                        bio,
                         password: uglyPassword,
                         ...(avatar && { avatarURL: avatar }),
                         githubUsername
