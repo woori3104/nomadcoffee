@@ -14,3 +14,4 @@ CREATE UNIQUE INDEX "Category.name_unique" ON "Category"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Category.slug_unique" ON "Category"("slug");
+ 
