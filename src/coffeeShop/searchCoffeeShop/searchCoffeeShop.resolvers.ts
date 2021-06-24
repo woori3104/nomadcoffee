@@ -11,6 +11,7 @@ const resolvers: Resolvers = {
         orderBy: {
           name: 'asc',
         },
+        include: { photos: true, categories: true, user: true },
         take: 5,
         skip: offset,
       }),
