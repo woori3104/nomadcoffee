@@ -3,7 +3,7 @@ import client from "../../client";
 
 const resolvers: Resolvers = {
   Query: {
-    searchCoffeShop: async (_, { keyword, offset=0 }) =>
+    searchCoffeeShop: async (_, { keyword, offset=0 }) =>
       await client.coffeeShop.findMany({
         where: {
           name: { contains: keyword.toLowerCase() },
