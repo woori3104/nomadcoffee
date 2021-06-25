@@ -9,6 +9,7 @@ export default {
         },
         take: 5,
         skip: offset,
+        include: { shops: true },
       });
     }
       

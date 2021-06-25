@@ -2,6 +2,6 @@ import { gql } from "apollo-server";
 
 export default gql`
   type Query {
-    seeCategories(offset: Int): MutationResponse!
+    seeCategories(offset: Int): [Category]
   }
 `;

@@ -2,15 +2,16 @@ import client from "../../client";
 
 export default {
   Query: {
-    seeCategorie: async (_, { name, offset = 1 }) => {
+    seeCategory: async (_, { name}) => {
       await client.category.findUnique({
         where: {
           name: name
         },
+        include: { shops: true },
       }).shops({
         take: 5,
-        skip:offset,
       });
+      
     }
   },
 };
