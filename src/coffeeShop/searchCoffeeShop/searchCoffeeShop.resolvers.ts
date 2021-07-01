@@ -3,7 +3,7 @@ import client from "../../client";
 
 const resolvers: Resolvers = {
   Query: {
-    searchCoffeeShop: async (_, { keyword, offset=0 }) =>
+    searchCoffeeShop: async (_, { keyword }) =>
       await client.coffeeShop.findMany({
         where: {
           name: { contains: keyword.toLowerCase() },
@@ -12,9 +12,20 @@ const resolvers: Resolvers = {
           name: 'asc',
         },
         include: { photos: true, categories: true, user: true },
-        take: 5,
-        skip: offset,
+      }),
+    searchCategories: async (_, { keyword }) =>
+      await client.coffeeShop.findMany({
+        where: {
+          categories: {
+            some: {
+              name: {
+                contains: keyword.toLowerCase(),
+              },
+            },
+          },
+        },
       }),
   },    
 };
 export default resolvers;
+
